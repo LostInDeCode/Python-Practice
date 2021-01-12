@@ -1,0 +1,64 @@
+#cost of ground shipping. Takes @param weight and returns cost
+def groundTotal(weight):
+  flat_charge = 20.00
+  if weight <= 2:
+    price_per_pound = 1.50
+    cost = (price_per_pound * weight) + flat_charge
+    return cost
+  elif weight > 2.0 and weight <= 6:
+    price_per_pound = 3.00
+    cost = (price_per_pound * weight) + flat_charge
+    return cost
+  elif weight > 6 and weight <= 10:
+    price_per_pound = 4.00
+    cost = (price_per_pound * weight) + flat_charge
+    return cost
+  else:
+    price_per_pound = 4.75
+    cost = (price_per_pound * weight) + flat_charge
+    return cost
+
+#test function with @param set to 8.4. Should return a cost of 53.60 cents
+print(groundTotal(8.4))
+
+p_g_shipping= 125.00
+
+#cost of drone shipping. Takes @param weight and returns cost
+def droneShipping(weight):
+  flat_charge = 0.00
+  if weight <= 2:
+    price_per_pound = 4.50
+    cost = (price_per_pound * weight) + flat_charge
+    return cost
+  elif weight > 2.0 and weight <= 6:
+    price_per_pound = 9.00
+    cost = (price_per_pound * weight) + flat_charge
+    return cost
+  elif weight > 6 and weight <= 10:
+    price_per_pound = 12.00
+    cost = (price_per_pound * weight) + flat_charge
+    return cost
+  else:
+    price_per_pound = 14.25
+    cost = (price_per_pound * weight) + flat_charge
+    return cost
+
+#tests a package that weighs 1.5 pounds. Should return a cost of 6.75
+print(droneShipping(1.5))
+
+#fuction with @param weight and tells the user the shipping method that is cheapest.
+def saveMoneyShipping(weight):
+  if groundTotal(weight) > droneShipping(weight):
+    cost = droneShipping(weight)
+    if cost > p_g_shipping:
+      return "Premium shipping is recommended"
+    return "Drone Shipping is the cheapest costing you: $ " + str(cost)
+  elif groundTotal(weight) < droneShipping(weight):
+    cost = groundTotal(weight)
+    if cost > p_g_shipping:
+       return "Premium shipping is recommended"
+    return "Ground Shipping is the cheapest costing you: $ " + str(cost)
+
+#testing function saveMoneyShipping w/ weight @ 4.8 and 41.5 lbs
+print(saveMoneyShipping(4.8))
+print(saveMoneyShipping(41.5))
